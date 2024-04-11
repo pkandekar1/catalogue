@@ -1,0 +1,27 @@
+
+<div class="bg-black p-2 text-white rounded p-1"><h5>Products Details:</h5></div>
+<div class="row p-4">
+  <ng-container *ngIf="cart.length > 0; else noProducts">
+    <div *ngFor="let product of cart" class="col-md-12">
+      <div class="row">
+        <div class="col-md-8">
+          <div><h6>Name:</h6>{{ product.product.name }}</div>
+          <div><h6>Price:</h6>{{product.product.price }}</div>
+          <input type="number" [(ngModel)]="product.quantity" (change)="updateQuantity(product.product, product.quantity)"/>&nbsp;&nbsp;
+          <button class="btn btn-danger" (click)="removeProduct(product.product)">Remove</button>
+        </div>
+        <div class="col-md-4">
+          <img [src]="product.product.image" alt="{{ product.product.name }}" />
+        </div>
+      </div>
+      <hr>
+    </div>
+    <div class="col-md-12">
+      <h5 class="bg-black p-2 text-white rounded">Total Amount of Products:</h5>
+      <div><h5>Total Price:</h5>{{ getTotal() }} Rs.</div>
+      <button class="btn btn-success mt-3" (click)="buyNow()">Buy Now</button>
+      <p *ngIf="isBought" class="text-success">Product bought successfully!</p>
+    </div>
+  </ng-container>
+  <ng-template #noProducts>No product added</ng-template>
+</div>

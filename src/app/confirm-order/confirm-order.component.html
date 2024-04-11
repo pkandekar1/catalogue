@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-8 offset-md-2">
+      <h2 class="text-center mb-4">Confirm Order</h2>
+      <div *ngIf="orderItems.length > 0; else noItems">
+        <div class="card mb-3 p-3" *ngFor="let item of orderItems">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img [src]="item.product.image" class="img-fluid rounded-start" alt="{{ item.product.name }}">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ item.product.name }}</h5>
+                <p class="card-text"><strong>Price:</strong> {{ item.product.price }}Rs.</p>
+                <p class="card-text"><strong>Quantity:</strong> {{ item.quantity }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noItems>
+        <div class="text-center">No items in order.</div>
+      </ng-template>
+      <div class="text-center">
+        <h5>Total Amount: <span class="text-danger">{{ getTotalAmount() }}Rs.</span></h5>
+        <button class="btn btn-warning mt-3 mb-3" (click)="confirmOrder()"><strong>Confirm Order</strong></button>
+        <div *ngIf="isOrderConfirmed" class="alert alert-success mt-3" role="alert">Your order is placed.</div>
+      </div>
+    </div>
+  </div>
+</div>
